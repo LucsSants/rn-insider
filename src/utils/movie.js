@@ -9,3 +9,10 @@ export function getListMovies(size, movies) {
 
   return movieList;
 }
+
+
+// gerar um número aleatório com base na lista
+
+export function randomBanner(movies) {
+  return Math.floor(Math.random()* movies.length)
+}
