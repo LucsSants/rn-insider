@@ -18,8 +18,11 @@ import api, {key} from '../../services/api'
 import Stars from 'react-native-stars'
 import Genres from '../../components/Genres'
 import ModalLink from '../../components/ModalLink'
-import {ScrollView, Modal} from 'react-native'
+import {ScrollView, Modal,ActivityIndicator} from 'react-native'
 import {saveMovie, hasMovie, deleteMovie} from '../../utils/storage'
+import { Wrapper } from '../Movies/styles'
+
+import Toast from 'react-native-root-toast'
 
 function Detail() {
 
@@ -29,6 +32,7 @@ function Detail() {
   const [movie, setMoive] = useState({})
   const [openLink, setOpenLink] = useState(false)
   const [favoritedMovie, setFavoritedMovie] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(()=> {
     let isActive=true
@@ -47,6 +51,7 @@ function Detail() {
         setMoive(response.data)
         const isFavorite = await hasMovie(response.data)
         setFavoritedMovie(isFavorite)
+        setLoading(false)
         //console.log(response.data)
       }
     }
@@ -63,12 +68,34 @@ function Detail() {
     if (favoritedMovie) {
       await deleteMovie(movie.id)
       setFavoritedMovie(false)
-      alert('Filme removido da sua lisa!')
+      //alert('Filme removido da sua lisa!')
+      let toast = Toast.show("Filme removido da sua lista!", {
+        duration: 2000,
+        position: Toast.positions.BOTTOM,
+        backgroundColor: '#E72F49',
+        shadow: false
+    })
     } else {
       await saveMovie('@primereact', movie)
       setFavoritedMovie(true)
-      alert("Filme salvo na sua lista!")
+      //alert("Filme salvo na sua lista!")
+      let toast = Toast.show("Filme salvo na sua lista!", {
+          duration: 2000,
+          position: Toast.positions.BOTTOM,
+          backgroundColor: '#E72F49',
+          shadow: false
+      })
     }
+  }
+
+  if(loading) {
+    return (
+      <Container>
+        <Wrapper>
+        <ActivityIndicator size="large" color="#FFF"/>
+        </Wrapper>
+      </Container>
+    )
   }
 
   return (
@@ -123,6 +150,7 @@ function Detail() {
         fullStar={<Ionicons name="md-star" size={24} color="#e7a74e" />}
         emptyStar={<Ionicons name="md-star-outline" size={24} color="#e7a74e" />}
         halfStar={<Ionicons name="md-star-half" size={24} color="#e7a74e" />}
+        disabled={true}
         />
         <Rate>{movie.vote_average}/10</Rate>
       </ContentArea>

@@ -20,6 +20,9 @@ import SliderItem from "../../components/SliderItem";
 import api, {key} from "../../services/api";
 
 import {useNavigation} from '@react-navigation/native'
+import { Wrapper } from "../Movies/styles";
+
+
 
 function Home() {
 
@@ -103,14 +106,16 @@ function Home() {
   if(loading) {
     return (
       <Container>
+        <Wrapper>
         <ActivityIndicator size="large" color="#FFF"/>
+        </Wrapper>
       </Container>
     )
   }
 
   return(
     <Container>
-
+      
       <Header title="React Prime"/>
 
       <SearchConainer>

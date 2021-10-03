@@ -21,7 +21,7 @@ export const EmptyMessage = styled.Text `
 color: #FFF;
 font-size: 20px;
 font-weight:bold;
-background-color: rgba(255,255,255, 0.1);
+background-color: rgba(255,255,255, 0.07);
 padding: 10px 30px;
 border-radius:30px;
 `

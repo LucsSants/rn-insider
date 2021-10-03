@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import  Header  from "../../components/Header";
 import { Container, ListMovies, EmptyMessage,Wrapper} from "./styles";
 import FavoriteItem from "../../components/FavoriteItem";
+import Toast from "react-native-root-toast";
 
 import { deleteMovie, getMoviesSave } from '../../utils/storage'
 import {useNavigation, useIsFocused} from '@react-navigation/native'
@@ -35,6 +36,12 @@ function Movies() {
   async function handleDelete(id) {
     const result = await deleteMovie(id)
     setMovies(result)
+    let toast = Toast.show("Filme removido da sua lista!", {
+      duration: 1000,
+      position: Toast.positions.BOTTOM,
+      backgroundColor: '#E72F49',
+      shadow: false
+  })
   }
 
   async function navigateDetailsPage(item) {
