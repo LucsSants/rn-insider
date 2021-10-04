@@ -3,10 +3,19 @@ import React from "react";
 import { Container, Banner, Title, RateContainer,Rate } from "./style";
 import {Ionicons} from '@expo/vector-icons'
 
+import Toast from 'react-native-root-toast'
+
 function SearchItem({data, navigatePage}) {
   function detailMovie() {
     if (data?.release_date === '') {
-      alert("Filme sem data")
+      //alert("Filme sem data")
+      let toast = Toast.show("Filme sem data de lançamento!", {
+        duration: 2000,
+        position: Toast.positions.BOTTOM,
+        backgroundColor: '#E72F49',
+        shadow: false,
+        opacity:1
+    })
       return
     }
     navigatePage(data) 

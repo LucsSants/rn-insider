@@ -32,19 +32,36 @@ height: 350px;
 border-bottom-left-radius: 70px;
 border-bottom-right-radius: 70px;
 `
+export const ButtonsWrapper = styled.View`
+position: absolute;
+top: 315px;
+right: 15px;
+flex-direction: row;
+align-items:center;
+justify-content: center;
+
+`
 
 export const ButtonLink = styled.TouchableOpacity`
 background-color: #e72f49;
 width: 63px;
 height:63px;
 border-radius: 35px;
-position: absolute;
-top: 310px;
-right: 15px;
 justify-content: center;
 align-items:center;
 z-index:99;
+`
 
+
+export const ShareButton = styled.TouchableOpacity`
+background-color: #e72f49;
+width: 45px;
+height:45px;
+border-radius: 23px;
+justify-content: center;
+align-items:center;
+z-index:99;
+margin-right: 8px;
 `
 
 export const Title = styled.Text`
@@ -52,7 +69,7 @@ color: #FFF;
 font-size: 22px;
 font-weight: bold;
 padding: 8px 14px;
-margin-top: 15px;
+margin-top:${props=> props.marginTop}px;
 `
 
 export const ContentArea = styled.View`
@@ -77,10 +94,18 @@ min-height: 35px;
 `
 
 export const Description = styled.Text`
-  padding-left:20px;
+  padding-left:14px;
   padding-right: 14px;
   padding-bottom: 30px;
   color: #fff;
   line-height: 20px;
+  font-size:15px;
 
+`
+
+export const ReleaseDate = styled.Text`
+padding-left: 14px;
+color: #E86275;
+font-size: 15px;
+font-weight: bold;
 `

@@ -9,14 +9,12 @@ import Routes from "./src/routes";
 
 function App() {
   return (
-    
     <RootSiblingParent>
       <NavigationContainer>
-        <StatusBar hidden = {true}/>
+        <StatusBar backgroundColor = "#141a29"/>
         <Routes/>
       </NavigationContainer>
     </RootSiblingParent>
-    
   )
 }
 

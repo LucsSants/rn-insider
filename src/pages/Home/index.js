@@ -123,7 +123,9 @@ function Home() {
           placeholder="Ex.: Vingadores"
           placeholderTextColor = "#ddd"
           value={input}
-          onChangeText={(text)=> setInput(text)}      
+          onChangeText={(text)=> setInput(text)}
+          returnKeyType='search'   
+          onSubmitEditing={handleSearchMovie}   
         />
 
         <SearchButton onPress={handleSearchMovie}> 

@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from "react";
 
-import { Container, ListMovies } from "./style";
+import { Container, ListMovies, NotFound } from "./style";
 
 import SearchItem from "../../components/SearchItem";
 
 import {useNavigation, useRoute} from '@react-navigation/native'
 
 import api, {key} from '../../services/api'
+
+import {ActivityIndicator} from 'react-native'
+import { Wrapper } from "../Movies/styles";
 
 
 function Search() {
@@ -52,18 +55,32 @@ function Search() {
 
   if (loading) {
     return(
-      <Container></Container>
+      <Container>
+        <Wrapper>
+        <ActivityIndicator size="large" color="#FFF"/>
+        </Wrapper>
+      </Container>
     )
   }
 
   return (
     <Container>
-      <ListMovies
-      data={movie}
-      showsVerticalScrollIndicator={false}
-      keyExtractor={(item)=> String(item.id)}
-      renderItem={({item})=> <SearchItem data={item} navigatePage={()=> navigateDetailsPage(item)} />}
-      />
+      {movie.length === 0 ? (
+        <Wrapper>
+          <NotFound>
+            Nenhum filme encontrado
+          </NotFound>
+        </Wrapper>
+      ):(
+        <ListMovies
+        data={movie}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item)=> String(item.id)}
+        renderItem={({item})=> <SearchItem data={item} navigatePage={()=> navigateDetailsPage(item)} />}
+        />
+      )}
+
+     
     </Container>
   )
 }

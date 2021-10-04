@@ -9,7 +9,10 @@ import {
   ContentArea,
   Rate,
   ListGenres,
-  Description
+  Description,
+  ButtonsWrapper,
+  ShareButton,
+  ReleaseDate
 
  } from './styles'
 import {Feather, Ionicons} from '@expo/vector-icons'
@@ -21,6 +24,7 @@ import ModalLink from '../../components/ModalLink'
 import {ScrollView, Modal,ActivityIndicator} from 'react-native'
 import {saveMovie, hasMovie, deleteMovie} from '../../utils/storage'
 import { Wrapper } from '../Movies/styles'
+import share from '../../utils/share'
 
 import Toast from 'react-native-root-toast'
 
@@ -63,6 +67,18 @@ function Detail() {
       isActive= false
     }
   }, [])
+
+  function getReleaseDate() {
+    const Date = movie?.release_date.split('-')
+    return `${Date[2]}/${Date[1]}/${Date[0]}`
+  }
+
+  function shareMovie() {
+      const url = movie?.homepage
+      share.onShare(`Olha esse filme:`, `Olha isso aqui:\n${movie.title}`, url)
+  }
+
+  console.log(movie?.release_date)
 
   async function handleFavoriteMovie(movie) {
     if (favoritedMovie) {
@@ -130,14 +146,22 @@ function Detail() {
       resizeMethod="resize"
       source={{uri: `https://image.tmdb.org/t/p/original/${movie.poster_path}`}}
       />
+      <ButtonsWrapper>
+      <ShareButton activeOpacity={0.6} onPress={()=> shareMovie()}>
+        <Ionicons
+          name="share-social" size={20} color="#FFF"
+          />
+        </ShareButton>
+        <ButtonLink activeOpacity={0.6} onPress={()=>setOpenLink(true)}> 
+          <Feather
+          name="link" size={24} color="#FFF"
+          />
+        </ButtonLink>
+        
+      </ButtonsWrapper>
+      
 
-      <ButtonLink onPress={()=>setOpenLink(true)}> 
-        <Feather
-        name="link" size={24} color="#FFF"
-        />
-      </ButtonLink>
-
-      <Title numberOfLines={2}>
+      <Title marginTop={15} numberOfLines={2}>
         {movie.title}
       </Title>
 
@@ -161,11 +185,14 @@ function Detail() {
       showsHorizontalScrollIndicator={false}
       keyExtractor={(item)=>String(item.id)}
       renderItem={({item})=> <Genres data={item}/>}
-
       />
 
+      <ReleaseDate>
+        Data de lançamento: {getReleaseDate()}
+      </ReleaseDate>
+
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Title> Descrição</Title>
+        <Title marginTop={2}> Descrição</Title>
         <Description>{movie?.overview}</Description>
 
       </ScrollView>

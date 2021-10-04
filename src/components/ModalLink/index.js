@@ -3,6 +3,7 @@ import {BackButton, Name} from './styles'
 import {Feather} from '@expo/vector-icons'
 
 
+
 import {WebView} from 'react-native-webview'
 
 function ModalLink({link, title, closeModal}) {
