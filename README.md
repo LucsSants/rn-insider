@@ -1,5 +1,7 @@
 ## React Insider - React Prime
+  
   <p>App feito no workshop React Insider 4.0 do <a href="https://www.youtube.com/channel/UCLc5Bq2yfs-S3Zse3ZFRMEQ">Sujeito Programador</a>.</p>
+  <p>App feito com React Native, ultilizando o Expo.</p>
   <p>O app cosiste em um agregador de informações de filmes, utilizando a API do <a href="https://www.themoviedb.org/"> The Movie Database (TMDB)</a>.</p>
   
 ## Mudanças e Melhorias
